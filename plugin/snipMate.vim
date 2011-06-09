@@ -56,24 +56,6 @@ fun! s:ProcessFile(file, ft, ...)
 endf
 
 fun! TriggerSnippet()
-	if exists('g:SuperTabMappingForward')
-		if g:SuperTabMappingForward == "<tab>"
-			let SuperTabPlug = maparg('<Plug>SuperTabForward', 'i')
-			if SuperTabPlug == ""
-				let SuperTabKey = "\<c-n>"
-			else
-				exec "let SuperTabKey = \"" . escape(SuperTabPlug, '<') . "\""
-			endif
-		elseif g:SuperTabMappingBackward == "<tab>"
-			let SuperTabPlug = maparg('<Plug>SuperTabBackward', 'i')
-			if SuperTabPlug == ""
-				let SuperTabKey = "\<c-p>"
-			else
-				exec "let SuperTabKey = \"" . escape(SuperTabPlug, '<') . "\""
-			endif
-		endif
-	endif
-
 	if pumvisible() " Update snippet if completion is used, or deal with supertab
 		if exists('SuperTabKey')
 			call feedkeys(SuperTabKey) | return ''
@@ -108,24 +90,6 @@ endf
 
 fun! BackwardsSnippet()
 	if exists('g:snipPos') | return snipMate#jumpTabStop(1) | endif
-
-	if exists('g:SuperTabMappingForward')
-		if g:SuperTabMappingForward == "<s-tab>"
-			let SuperTabPlug = maparg('<Plug>SuperTabForward', 'i')
-			if SuperTabPlug == ""
-				let SuperTabKey = "\<c-n>"
-			else
-				exec "let SuperTabKey = \"" . escape(SuperTabPlug, '<') . "\""
-			endif
-		elseif g:SuperTabMappingBackward == "<s-tab>"
-			let SuperTabPlug = maparg('<Plug>SuperTabBackward', 'i')
-			if SuperTabPlug == ""
-				let SuperTabKey = "\<c-p>"
-			else
-				exec "let SuperTabKey = \"" . escape(SuperTabPlug, '<') . "\""
-			endif
-		endif
-	endif
 	if exists('SuperTabKey')
 		call feedkeys(SuperTabKey)
 		return ''
