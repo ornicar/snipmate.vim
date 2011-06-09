@@ -19,8 +19,8 @@ let s:snips_trigger_key_normalized = substitute(g:snips_trigger_key, '[<>]', '',
 
 exec 'ino <silent> ' . g:snips_trigger_key . ' <c-g>u<c-r>=TriggerSnippet()<cr>'
 exec 'snor <silent> ' . g:snips_trigger_key . ' <esc>i<right><c-r>=TriggerSnippet()<cr>'
-exec 'ino <silent> <s-' . s:snips_trigger_key_normalized . '> <c-r>=BackwardsSnippet()<cr>'
-exec 'snor <silent> <s-' . s:snips_trigger_key_normalized . '> <esc>i<right><c-r>=BackwardsSnippet()<cr>'
+"exec 'ino <silent> <s-' . s:snips_trigger_key_normalized . '> <c-r>=BackwardsSnippet()<cr>'
+"exec 'snor <silent> <s-' . s:snips_trigger_key_normalized . '> <esc>i<right><c-r>=BackwardsSnippet()<cr>'
 exec 'ino <silent> <c-r>' . g:snips_trigger_key. ' <c-r>=ShowAvailableSnips()<cr>'
 
 " maybe there is a better way without polluting registers ?
