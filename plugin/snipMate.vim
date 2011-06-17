@@ -67,17 +67,15 @@ fun! TriggerSnippet()
 	if exists('g:snipPos') | return snipMate#jumpTabStop(0) | endif
 
 	let word = matchstr(getline('.'), '\S\+\%'.col('.').'c')
-	for scope in split(&ft, '\.') + ['_']
-		let [trigger, snippet] = s:GetSnippet(word, scope)
-		" If word is a trigger for a snippet, delete the trigger & expand
-		" the snippet.
-		if snippet != ''
-			let &undolevels = &undolevels " create new undo point
-			let col = col('.') - len(trigger)
-			sil exe 's/\V'.escape(trigger, '/\.').'\%#//'
-			return snipMate#expandSnip(snippet, col)
-		endif
-	endfor
+	let [trigger, snippet] = s:GetSnippet(word)
+	" If word is a trigger for a snippet, delete the trigger & expand
+	" the snippet.
+	if snippet != ''
+		let &undolevels = &undolevels " create new undo point
+		let col = col('.') - len(trigger)
+		sil exe 's/\V'.escape(trigger, '/\.').'\%#//'
+		return snipMate#expandSnip(snippet, col)
+	endif
 
 	if exists('SuperTabKey')
 		call feedkeys(SuperTabKey)
@@ -100,7 +98,7 @@ endf
 " Check if the word under the cursor is a snippet trigger.
 " If it is not, it gets split by non-word characters and looked up in
 " parts, e.g. 'foo' in 'bar.foo'.
-fun! s:GetSnippet(word, scope)
+fun! s:GetSnippet(word)
 	let snippet = ''
 	let lookups = [a:word] " lookup whole word always and first, e.g. '$_'
 	let parts = split(a:word, '\W\zs')
@@ -117,9 +115,9 @@ fun! s:GetSnippet(word, scope)
 		let lookups += [lookup]
 	endfor
 	" prefer longest word
-	for word in reverse(lookups)
+	for word in lookups
 		" echomsg string(lookups).' current: '.word
-		let snippetD = get(funcref#Call(s:snipMate['get_snippets'], [[a:scope], word]), word, {})
+		let snippetD = get(funcref#Call(s:snipMate['get_snippets'], [split(&ft, '\.') + ['_'], word.'*']), word, {})
 		if !empty(snippetD)
 			let s = s:ChooseSnippet(snippetD)
 			if type(s) == type([])
@@ -127,11 +125,11 @@ fun! s:GetSnippet(word, scope)
 			else
 				let snippet = s
 			end
-			if snippet == '' | break | endif
+			if snippet != '' | break | endif
 		endif
 	endfor
 	if word == '' && a:word != '.' && stridx(a:word, '.') != -1
-		let [word, snippet] = s:GetSnippet('.', a:scope)
+		let [word, snippet] = s:GetSnippet('.')
 	endif
 	return [word, snippet]
 endf

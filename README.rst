@@ -5,7 +5,7 @@ snipmate.vim
 :Author: `Michael Sanders`_
 :Maintainer: `Rok Garbas`_
 :Homepage: http://www.vim.org/scripts/script.php?script_id=2540 
-:Contributors: `MarcWeber`_, `lilydjwg`_, `henrik`_, `steveno`_, `asymmetric`_, `jherdman`_, `ironcamel`_, `honza`_, `jb55`_, `robhudson`_, `kozo2`_, `MicahElliott`_, `darkwise`_, `redpill`_, `thisgeek`_, `sickill`_, `pose`_, `marutanm`_, `r00k`_, `jbernard`_, `holizz`_, `muffinresearch`_, `statik`_, Eustaquio Rangel, `alderz`_
+:Contributors: `MarcWeber`_, `lilydjwg`_, `henrik`_, `steveno`_, `asymmetric`_, `jherdman`_, `ironcamel`_, `honza`_, `jb55`_, `robhudson`_, `kozo2`_, `MicahElliott`_, `darkwise`_, `redpill`_, `thisgeek`_, `sickill`_, `pose`_, `marutanm`_, `r00k`_, `jbernard`_, `holizz`_, `muffinresearch`_, `statik`_, Eustaquio Rangel, `alderz`_, `pielgrzym`_
 
 
 .. contents::
@@ -43,6 +43,9 @@ Changelog
 1.0 [Unreleased]
 ----------------
 
+    * Adding general snippets to ``css.snippets`` and ``htmldjango.snippets``
+      [2011-06-10, `pielgrzym`_]
+
     * Adding ``css.snippets`` from `tisho`_
       (https://github.com/tisho/css-snippets-snipmate)
       [2011-04-17, `garbas`_]
@@ -68,6 +71,10 @@ Changelog
     * Updated README: added contributors, instructions how to install snipMate,
       some spellchecking of my wonderfull english, added this Changelog
       [2011-02-07, `garbas`_]
+
+    * Fixed bug: When leaving a placeholder unchanged and trying to jump to the
+      next placeholder, the text of the first placeholder would get cleared.
+      [2011-06-16, `jgosmann`_]
 
     * From below mentioned merges I must specially mention `MarcWeber`_'s patch
       which brought quite a few functionalities/improvements:
@@ -246,3 +253,5 @@ TODO / Future
 .. _`ervandew`: https://github.com/ervandew
 .. _`blueyed`: https://github.com/blueyed
 .. _`tisho`: https://github.com/tisho
+.. _`pielgrzym`: https://github.com/pielgrzym
+.. _`jgosmann`: https://github.com/jgosmann
